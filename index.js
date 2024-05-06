@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'avatar', maxCount: 1 }]));
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, origin: "https://manojit-007.github.io/blog-frontend/" }));
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(__dirname + '/uploads'));
