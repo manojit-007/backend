@@ -31,8 +31,7 @@ app.use(errorHandler);
 
 
 
-const DataBaseUrl = process.env.MONGODB_URI;
-mongoose.connect(DataBaseUrl)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connection to MongoDB successful"))
     .catch(err => console.error("Connection to MongoDB failed", err));
 
