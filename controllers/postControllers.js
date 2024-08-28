@@ -23,16 +23,16 @@ const createPost = async (req, res, next) => {
         }
 
         if (!title || !description ) {
-            return next(new HttpError("Fill in all the fields ", 422));
+            return next(new HttpError("Fill in all the fields", 422));
         }
         if (!req.files) {
-            return next(new HttpError("img not found", 422));
+            return next(new HttpError("Image not found", 422));
         }
 
         const thumbnailPath = req.files.thumbnail[0].path; 
 
         if (req.files.thumbnail[0].size > 2000000) {
-            return next(new HttpError("Requested image size is too big. Should be less than 2mb", 422));
+            return next(new HttpError("Requested image size is too big. Should be less than 2MB", 422));
         }
 
         const uploadResult = await uploadCloudinary(thumbnailPath);
@@ -46,7 +46,7 @@ const createPost = async (req, res, next) => {
             category, 
             description, 
             thumbnail: uploadResult.secure_url, 
-            creator: req.user.id ,
+            creator: req.user.id,
             createdAt: Date.now()
         });
 
@@ -60,8 +60,7 @@ const createPost = async (req, res, next) => {
             await currentUser.save();
         }
 
-        // res.status(201).json(newPost);
-        res.status(201);
+        res.status(201).json({ message: "Post created successfully", post: newPost });
     } catch (error) {
         return next(new HttpError(error, 500));
     }
